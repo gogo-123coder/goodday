@@ -346,13 +346,28 @@ function buildPrompt(td){
 
 async function callGemini(prompt){
   const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-  const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.72,maxOutputTokens:2000}})});
+  const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+    contents:[{parts:[{text:prompt}]}],
+    generationConfig:{temperature:0.72,maxOutputTokens:4000,thinkingConfig:{thinkingBudget:0}}
+  })});
   if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||`HTTP ${res.status}`);}
   const data=await res.json();
-  const raw=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
-  const match=raw.match(/\{[\s\S]*\}/);
-  if(!match)throw new Error('回應格式異常，請重試');
-  return JSON.parse(match[0]);
+  // 思考型模型會有多個 parts，把所有 text 合併後再找 JSON
+  const allParts=data.candidates?.[0]?.content?.parts||[];
+  const raw=allParts.map(p=>p.text||'').join('');
+  // 找最後一個完整 JSON 物件（思考型模型的 JSON 在最後）
+  const matches=[...raw.matchAll(/\{[\s\S]*?\}/g)];
+  let parsed=null;
+  for(let i=matches.length-1;i>=0;i--){
+    try{parsed=JSON.parse(matches[i][0]);if(parsed.totalScore)break;}catch(e){}
+  }
+  // 若上面失敗，用貪婪匹配抓最大 JSON
+  if(!parsed){
+    const m=raw.match(/\{[\s\S]*\}/);
+    if(!m)throw new Error('回應格式異常，請重試');
+    try{parsed=JSON.parse(m[0]);}catch(e){throw new Error('JSON解析失敗，請重試');}
+  }
+  return parsed;
 }
 
 function splitPara(txt){return(txt||'').split(/(?<=[。！？])\s*/).filter(p=>p.trim().length>4).map(p=>`<p>${p.trim()}</p>`).join('')}
