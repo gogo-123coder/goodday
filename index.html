@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="千金運勢">
+<title>千金・每日運勢</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f4f0;--white:#ffffff;--card-br:16px;
+  --border:#e8e4dc;--text:#1a1714;--text-m:#7a7570;--text-d:#b0ada8;
+  --orange:#e07b3a;--orange-lt:#fdf0e6;--orange-bd:#f4c49a;
+  --rose:#c45c6a;--rose-lt:#fdeef0;--rose-bd:#f0b0ba;
+  --purple:#7c5cbf;--purple-lt:#f0ecfa;--purple-bd:#c4b0e8;
+  --green:#4a9068;--green-lt:#edf6f1;--green-bd:#a0d0b8;
+  --blue:#4a78b8;--blue-lt:#edf2fa;--blue-bd:#a4bce0;
+  --gold:#b8922a;--gold-lt:#fdf6e6;--gold-bd:#e4cc88;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{font-size:16px}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans TC',sans-serif;font-weight:400;line-height:1.75;min-height:100vh;padding-bottom:56px}
+
+/* HEADER */
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:52px 18px 18px;position:relative}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start}
+.header-name{font-size:0.85rem;color:var(--text-m);margin-bottom:2px}
+.header-title{font-family:'Noto Serif TC',serif;font-size:1.5rem;font-weight:900;color:var(--text);letter-spacing:2px;line-height:1.2}
+.header-title span{color:var(--orange)}
+.header-right{text-align:right}
+.header-date-main{font-size:0.95rem;font-weight:500;color:var(--text)}
+.header-date-sub{font-size:0.78rem;color:var(--text-m);margin-top:2px}
+.header-tags{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.htag{font-size:0.72rem;padding:3px 10px;border-radius:20px;background:var(--orange-lt);color:var(--orange);border:1px solid var(--orange-bd)}
+.htag.purple{background:var(--purple-lt);color:var(--purple);border-color:var(--purple-bd)}
+.htag.blue{background:var(--blue-lt);color:var(--blue);border-color:var(--blue-bd)}
+.settings-btn{position:absolute;right:16px;top:52px;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);background:var(--bg);color:var(--text-m);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+
+/* OVERALL BANNER */
+.overall-banner{background:var(--white);border-bottom:1px solid var(--border);padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
+.ob-label{font-size:0.85rem;color:var(--text-m)}
+.ob-value{font-size:0.95rem;font-weight:700;color:var(--orange)}
+
+/* SECTION + CARD */
+.section{padding:10px 14px 0}
+.card{background:var(--white);border-radius:var(--card-br);border:1px solid var(--border);margin-bottom:10px;overflow:hidden}
+.card-header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 0}
+.card-title{font-size:1rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px}
+.card-subtitle{font-size:0.72rem;color:var(--text-d);margin-top:2px}
+.card-stars{font-size:0.95rem;color:var(--gold);letter-spacing:2px;white-space:nowrap}
+.card-body{padding:12px 16px 16px}
+
+/* YI JI */
+.yiji-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 16px 16px}
+.yi-col{border-radius:12px;padding:12px;background:var(--green-lt);border:1px solid var(--green-bd)}
+.ji-col{border-radius:12px;padding:12px;background:var(--rose-lt);border:1px solid var(--rose-bd)}
+.yj-head{font-size:0.8rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.yj-head.y{color:var(--green)}.yj-head.j{color:var(--rose)}
+.yj-item{font-size:0.82rem;color:var(--text);line-height:1.5;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.06)}
+.yj-item:last-child{border-bottom:none;padding-bottom:0}
+
+/* LUCKY CAPSULES */
+.lucky-caps{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 16px}
+.lcap{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:30px;padding:9px 14px;font-size:0.8rem}
+.lcap-icon{font-size:1rem;flex-shrink:0}
+.lcap-label{color:var(--text-m);font-size:0.68rem;line-height:1}
+.lcap-val{color:var(--text);font-weight:600;font-size:0.82rem;margin-top:1px}
+
+/* TIPS */
+.tips-list{list-style:none}
+.tips-list li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.9rem;line-height:1.6}
+.tips-list li:last-child{border-bottom:none;padding-bottom:0}
+.tip-ico{font-size:1.1rem;flex-shrink:0;margin-top:1px}
+
+/* SUB SCORES */
+.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.sub-item{background:var(--white);padding:14px 16px;text-align:center}
+.sub-label{font-size:0.72rem;color:var(--text-m);margin-bottom:6px}
+.sub-num{font-family:'Noto Serif TC',serif;font-size:2rem;font-weight:900;line-height:1;margin-bottom:4px}
+.sub-stars{font-size:0.75rem;letter-spacing:1px;color:var(--gold)}
+.sub-desc{font-size:0.72rem;color:var(--text-m);line-height:1.45;margin-top:4px}
+.c-love{color:var(--rose)}.c-career{color:var(--blue)}.c-wealth{color:var(--gold)}.c-health{color:var(--green)}
+
+/* ANALYSIS TEXT */
+.ab-text{font-size:0.9rem;line-height:1.85;color:var(--text)}
+.ab-text p{margin-bottom:10px}.ab-text p:last-child{margin-bottom:0}
+
+/* YUANFEN */
+.yuanfen-head{background:linear-gradient(135deg,var(--rose-lt),var(--purple-lt));border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:8px}
+.yuanfen-head-stars{font-size:0.95rem;color:var(--gold);margin-left:auto}
+.yuanfen-summary{padding:14px 16px;font-size:0.88rem;line-height:1.8;color:var(--text);border-bottom:1px solid var(--border)}
+.yuanfen-guiren{padding:14px 16px;border-bottom:1px solid var(--border)}
+.guiren-label{font-size:0.75rem;font-weight:700;color:var(--purple);display:flex;align-items:center;gap:4px;margin-bottom:6px}
+.guiren-text{font-size:0.88rem;line-height:1.75;color:var(--text)}
+.guiren-text strong{color:var(--purple)}
+
+/* MATCH CARDS */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.match-card{background:var(--white);padding:14px}
+.mc-badge{display:inline-flex;align-items:center;font-size:0.65rem;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:8px}
+.mc-badge.primary{background:var(--rose-lt);color:var(--rose);border:1px solid var(--rose-bd)}
+.mc-badge.secondary{background:var(--blue-lt);color:var(--blue);border:1px solid var(--blue-bd)}
+.mc-badge.third{background:var(--orange-lt);color:var(--orange);border:1px solid var(--orange-bd)}
+.mc-badge.fourth{background:var(--green-lt);color:var(--green);border:1px solid var(--green-bd)}
+.mc-name{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.mc-desc{font-size:0.78rem;color:var(--text-m);line-height:1.6}
+
+/* DIRECTION */
+.dir-row{display:flex;gap:8px;padding:14px 16px;border-top:1px solid var(--border);flex-wrap:wrap;align-items:center}
+.dir-chip{font-size:0.78rem;padding:5px 14px;border-radius:20px}
+.dir-chip.good{background:var(--orange-lt);color:var(--orange);border:1px solid var(--orange-bd)}
+.dir-chip.bad{background:var(--rose-lt);color:var(--rose);border:1px solid var(--rose-bd)}
+
+/* SUMMARY */
+.summary-text{font-size:0.92rem;line-height:1.9;color:var(--text);border-left:3px solid var(--orange);padding-left:14px}
+
+/* FOOTER */
+.footer-note{text-align:center;font-size:0.7rem;color:var(--text-d);padding:12px 14px 4px;line-height:1.7}
+.cache-notice{text-align:center;font-size:0.7rem;color:var(--text-d);letter-spacing:1px;padding:6px 0 2px}
+.refresh-btn{display:block;width:calc(100% - 28px);margin:4px 14px 8px;background:none;border:1.5px solid var(--border);color:var(--text-m);border-radius:14px;padding:13px;font-size:0.82rem;letter-spacing:2px;cursor:pointer;font-family:'Noto Sans TC',sans-serif}
+
+/* LOADING */
+.loading{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.spin-wrap{position:relative;width:56px;height:56px}
+.spin-outer{width:56px;height:56px;border:2px solid var(--border);border-top-color:var(--orange);border-radius:50%;animation:spin 1.2s linear infinite;position:absolute}
+.spin-inner{width:34px;height:34px;border:2px solid transparent;border-bottom-color:var(--purple);border-radius:50%;animation:spin 0.9s linear infinite reverse;position:absolute;top:11px;left:11px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:0.92rem;color:var(--text-m);letter-spacing:2px}
+.loading-sub{font-size:0.75rem;color:var(--text-d);letter-spacing:1px}
+
+/* ERROR */
+.error-box{background:#fff5f5;border:1px solid #fcc;border-radius:14px;padding:18px;margin:14px;color:#c44;font-size:0.9rem;line-height:1.75}
+.error-box strong{display:block;margin-bottom:6px}
+
+/* MODAL */
+.modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;display:flex;align-items:flex-end}
+.modal{background:var(--white);border-top:1px solid var(--border);border-radius:22px 22px 0 0;width:100%;padding:26px 20px 48px}
+.modal-title{font-family:'Noto Serif TC',serif;color:var(--text);font-size:1.1rem;letter-spacing:2px;margin-bottom:6px}
+.modal-subtitle{font-size:0.8rem;color:var(--text-m);margin-bottom:18px;line-height:1.7}
+.modal-subtitle a{color:var(--orange)}
+.modal input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;padding:15px 16px;color:var(--text);font-size:0.88rem;font-family:monospace;margin-bottom:14px;outline:none}
+.modal input:focus{border-color:var(--orange)}
+.btn-primary{width:100%;background:var(--orange);color:#fff;border:none;border-radius:13px;padding:17px;font-size:0.95rem;font-family:'Noto Sans TC',sans-serif;font-weight:600;letter-spacing:3px;cursor:pointer}
+.btn-secondary{width:100%;background:none;color:var(--text-m);border:1px solid var(--border);border-radius:13px;padding:13px;font-size:0.85rem;cursor:pointer;margin-top:10px;font-family:'Noto Sans TC',sans-serif}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-name">千金的</div>
+      <div class="header-title">今日<span>運勢</span></div>
+    </div>
+    <div class="header-right">
+      <div class="header-date-main" id="hDateMain">—</div>
+      <div class="header-date-sub" id="hDateSub">農曆載入中</div>
+    </div>
+  </div>
+  <div class="header-tags" id="hTags"></div>
+  <button class="settings-btn" onclick="openSettings()">⚙</button>
+</div>
+
+<div class="overall-banner" id="overallBanner" style="display:none">
+  <span class="ob-label">今日整體</span>
+  <span class="ob-value" id="overallVal">—</span>
+</div>
+
+<div id="loadingState" class="loading">
+  <div class="spin-wrap"><div class="spin-outer"></div><div class="spin-inner"></div></div>
+  <div class="loading-text">正在推算今日運勢</div>
+  <div class="loading-sub">八字・紫微斗數・雙子座 綜合分析中</div>
+</div>
+
+<div id="errorState" class="error-box hidden">
+  <strong>⚠ 無法取得運勢</strong>
+  <span id="errorMsg"></span>
+</div>
+
+<div id="content" class="hidden">
+
+  <div class="section">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">☀️ 今日宜忌與開運</div>
+          <div class="card-subtitle" id="ganzhiSub">—</div>
+        </div>
+      </div>
+      <div class="yiji-grid">
+        <div class="yi-col"><div class="yj-head y">✓ 宜</div><div id="yiItems"></div></div>
+        <div class="ji-col"><div class="yj-head j">✕ 忌</div><div id="jiItems"></div></div>
+      </div>
+      <div class="lucky-caps" id="luckyCaps"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="card-header"><div class="card-title">💡 今日開運建議</div></div>
+      <div class="card-body" style="padding-top:8px"><ul class="tips-list" id="tipsList"></ul></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card" style="overflow:hidden">
+      <div class="card-header" style="padding-bottom:10px"><div class="card-title">📊 各項運勢評分</div></div>
+      <div class="sub-grid" id="subScores"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">☯ 八字今日運勢</div><div class="card-subtitle">今日日柱影響分析</div></div>
+        <div class="card-stars" id="baziStars"></div>
+      </div>
+      <div class="card-body"><div class="ab-text" id="baziText"></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">✦ 紫微斗數今日</div><div class="card-subtitle" id="ziweiSub">廉貞坐命</div></div>
+        <div class="card-stars" id="ziweiStars"></div>
+      </div>
+      <div class="card-body"><div class="ab-text" id="ziweiText"></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">♊ 星座今日運勢</div><div class="card-subtitle">雙子座</div></div>
+        <div class="card-stars" id="zodiacStars"></div>
+      </div>
+      <div class="card-body"><div class="ab-text" id="zodiacText"></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card" style="overflow:hidden">
+      <div class="yuanfen-head">
+        <span style="font-size:1.1rem">💕</span>
+        <div>
+          <div style="font-weight:700;font-size:0.95rem">今日姻緣 &amp; 貴人</div>
+          <div style="font-size:0.7rem;color:var(--text-m)">三盤綜合推算</div>
+        </div>
+        <div class="yuanfen-head-stars" id="yuanfenStars"></div>
+      </div>
+      <div class="yuanfen-summary" id="yuanfenSummary"></div>
+      <div class="yuanfen-guiren">
+        <div class="guiren-label">✦ 今日貴人星座</div>
+        <div class="guiren-text" id="guirenText"></div>
+      </div>
+      <div class="card-header" style="padding-bottom:10px"><div class="card-title" style="font-size:0.85rem">命盤推算較合適的姻緣對象</div></div>
+      <div class="match-grid" id="matchGrid"></div>
+      <div class="dir-row" id="dirRow"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <div class="card-header"><div class="card-title">📝 今日綜合總結</div></div>
+      <div class="card-body"><p class="summary-text" id="summaryText"></p></div>
+    </div>
+  </div>
+
+  <div class="cache-notice" id="cacheNotice"></div>
+  <button class="refresh-btn" onclick="loadFortune(true)">↻ 重新推算今日運勢</button>
+  <div class="footer-note" id="footerNote"></div>
+</div>
+
+<div id="settingsModal" class="modal-backdrop hidden">
+  <div class="modal">
+    <div class="modal-title">⚙ 設定 Gemini API Key</div>
+    <div class="modal-subtitle">
+      前往 <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a> 登入 Google 帳號<br>
+      點「Get API key」→「Create API key」複製後貼上。<br>
+      Key 只儲存在您的手機，不會上傳任何地方。
+    </div>
+    <input type="text" id="apiKeyInput" placeholder="AIzaSy..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <button class="btn-primary" onclick="saveKey()">儲 存 並 推 算 運 勢</button>
+    <button class="btn-secondary" onclick="closeSettings()">取 消</button>
+  </div>
+</div>
+
+<script>
+const STEMS=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+const BRANCHES=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const WEEKDAY=['日','一','二','三','四','五','六'];
+const BIRTH={
+  year:1987,month:6,day:13,lunarMonth:5,lunarDay:18,hourBranch:'丑',
+  bazi:'丁卯年 丙午月 癸巳日 癸丑時',riZhu:'甲子日主',
+  mingGong:'未宮（土五局）',mainStars:'天機星入命，輔以太陰',
+  shangSheng:'上升牡羊',zodiac:'雙子座',chineseZodiac:'兔',
+  status:'目前單身，期望遇到適合的姻緣伴侶'
+};
+function yearGZ(y){const i=((y-4)%60+60)%60;return STEMS[i%10]+BRANCHES[i%12]}
+function monthGZ(y,m){const si=((y-4)%10+10)%10;const bi=m===12?0:m;return STEMS[((si%5)*2+bi)%10]+BRANCHES[bi]}
+function dayGZ(y,m,d){const diff=Math.round((new Date(y,m-1,d)-new Date(1900,0,1))/86400000);const i=((10+diff)%60+60)%60;return STEMS[i%10]+BRANCHES[i%12]}
+function toStars(n){const f=Math.round(n/2);return'★'.repeat(Math.min(f,5))+'☆'.repeat(Math.max(5-f,0))}
+function overallLabel(n){if(n>=9)return'大吉旺盛';if(n>=7)return'順暢有利';if(n>=5)return'平穩尚可';if(n>=3)return'宜低調';return'謹慎應對'}
+const BADGE_CLS=['primary','secondary','third','fourth'];
+
+function initDate(){
+  const now=new Date();const y=now.getFullYear(),m=now.getMonth()+1,d=now.getDate();
+  const dgz=dayGZ(y,m,d);
+  document.getElementById('hDateMain').textContent=`${y}/${m}/${d} 週${WEEKDAY[now.getDay()]}`;
+  document.getElementById('hTags').innerHTML=
+    `<span class="htag">${BIRTH.zodiac}</span><span class="htag purple">${BIRTH.shangSheng}</span><span class="htag blue">${BIRTH.riZhu}</span>`;
+  document.getElementById('ganzhiSub').textContent=`${dgz}日・週${WEEKDAY[now.getDay()]}`;
+  return{y,m,d,ygz:yearGZ(y),mgz:monthGZ(y,m),dgz};
+}
+
+function buildPrompt(td){
+  return`你是精通八字命理、紫微斗數與西洋占星的命理師，請為命主分析「今日」運勢。
+
+命主資料：
+- 西曆生日：${BIRTH.year}年${BIRTH.month}月${BIRTH.day}日，農曆${BIRTH.lunarMonth}月${BIRTH.lunarDay}日，${BIRTH.hourBranch}時
+- 八字：${BIRTH.bazi}，日主：${BIRTH.riZhu}
+- 紫微命宮：${BIRTH.mingGong}，主星：${BIRTH.mainStars}
+- 星座：${BIRTH.zodiac}，上升：${BIRTH.shangSheng}
+- 感情狀態：${BIRTH.status}
+
+今日資訊：
+- 日期：${td.y}年${td.m}月${td.d}日
+- 今日干支：${td.ygz}年 ${td.mgz}月 ${td.dgz}日
+
+規則：誠實評分1-10，全部用白話文，不用命理術語，結論+原因，姻緣分析要具體有場景感。
+
+嚴格以下列JSON格式回覆，不加任何文字或markdown：
+{"totalScore":整數,"overallLabel":"狀態一詞","lunarDate":"農曆幾月幾日","yi":["宜1","宜2","宜3","宜4"],"ji":["忌1","忌2","忌3","忌4"],"luckyColor":"幸運色","luckyNumber":"幸運數","peakTime":"旺時","luckyItem":"開運物","tips":["建議1","建議2","建議3"],"scores":{"love":{"score":整數,"stars":"★★★★☆","desc":"一句話"},"career":{"score":整數,"stars":"★★★☆☆","desc":"一句話"},"wealth":{"score":整數,"stars":"★★★☆☆","desc":"一句話"},"health":{"score":整數,"stars":"★★★☆☆","desc":"一句話"}},"bazi":{"stars":"★★★★☆","text":"約100字白話"},"ziwei":{"stars":"★★★★★","subLabel":"今日活躍宮位","text":"約120字多段分析"},"zodiac":{"stars":"★★★★☆","text":"約80字多段"},"yuanfen":{"stars":"★★★★★","summary":"約60字","guiren":"今日貴人說明，星座名用**加粗**","matches":[{"badge":"命盤首選・今日最強","name":"星座名","desc":"約50字"},{"badge":"今日加分","name":"星座名","desc":"約50字"},{"badge":"命盤次選","name":"星座名","desc":"約50字"},{"badge":"命盤次選","name":"星座名","desc":"約50字"}],"goodDir":"吉方","badDir":"凶方"},"summary":"約80字總結"}`;
+}
+
+async function callGemini(prompt){
+  const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+  const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.72,maxOutputTokens:2000}})});
+  if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||`HTTP ${res.status}`);}
+  const data=await res.json();
+  const raw=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
+  const match=raw.match(/\{[\s\S]*\}/);
+  if(!match)throw new Error('回應格式異常，請重試');
+  return JSON.parse(match[0]);
+}
+
+function splitPara(txt){return(txt||'').split(/(?<=[。！？])\s*/).filter(p=>p.trim().length>4).map(p=>`<p>${p.trim()}</p>`).join('')}
+
+function render(d,td){
+  document.getElementById('overallBanner').style.display='flex';
+  document.getElementById('overallVal').textContent=d.overallLabel||overallLabel(d.totalScore);
+  if(d.lunarDate)document.getElementById('hDateSub').textContent=`農曆 ${d.lunarDate}`;
+  document.getElementById('yiItems').innerHTML=(d.yi||[]).map(t=>`<div class="yj-item">${t}</div>`).join('');
+  document.getElementById('jiItems').innerHTML=(d.ji||[]).map(t=>`<div class="yj-item">${t}</div>`).join('');
+  document.getElementById('luckyCaps').innerHTML=[
+    {ico:'🎨',l:'幸運色',v:d.luckyColor},{ico:'🔢',l:'幸運數',v:d.luckyNumber},
+    {ico:'⏰',l:'旺時',v:d.peakTime},{ico:'💎',l:'開運物',v:d.luckyItem}
+  ].map(c=>`<div class="lcap"><span class="lcap-icon">${c.ico}</span><div><div class="lcap-label">${c.l}</div><div class="lcap-val">${c.v||'—'}</div></div></div>`).join('');
+  document.getElementById('tipsList').innerHTML=(d.tips||[]).map(t=>`<li><span class="tip-ico">◈</span>${t}</li>`).join('');
+  const s=d.scores||{};
+  document.getElementById('subScores').innerHTML=[
+    {k:'love',l:'愛情姻緣',c:'c-love',e:'❤️'},
+    {k:'career',l:'事業工作',c:'c-career',e:'💼'},
+    {k:'wealth',l:'財運金錢',c:'c-wealth',e:'💰'},
+    {k:'health',l:'健康狀態',c:'c-health',e:'🍃'}
+  ].map(({k,l,c,e})=>`<div class="sub-item"><div class="sub-label">${e} ${l}</div><div class="sub-num ${c}">${s[k]?.score??'—'}</div><div class="sub-stars">${s[k]?.stars||toStars(s[k]?.score||5)}</div><div class="sub-desc">${s[k]?.desc||''}</div></div>`).join('');
+  document.getElementById('baziStars').textContent=d.bazi?.stars||'';
+  document.getElementById('baziText').innerHTML=splitPara(d.bazi?.text);
+  document.getElementById('ziweiStars').textContent=d.ziwei?.stars||'';
+  document.getElementById('ziweiSub').textContent=d.ziwei?.subLabel||'廉貞坐命';
+  document.getElementById('ziweiText').innerHTML=splitPara(d.ziwei?.text);
+  document.getElementById('zodiacStars').textContent=d.zodiac?.stars||'';
+  document.getElementById('zodiacText').innerHTML=splitPara(d.zodiac?.text);
+  const yf=d.yuanfen||{};
+  document.getElementById('yuanfenStars').textContent=yf.stars||'';
+  document.getElementById('yuanfenSummary').textContent=yf.summary||'';
+  document.getElementById('guirenText').innerHTML=(yf.guiren||'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  document.getElementById('matchGrid').innerHTML=(yf.matches||[]).map((m,i)=>`<div class="match-card"><div class="mc-badge ${BADGE_CLS[i]||'fourth'}">${m.badge||''}</div><div class="mc-name">${m.name||''}</div><div class="mc-desc">${m.desc||''}</div></div>`).join('');
+  let dr=`<span style="font-size:0.75rem;color:var(--text-m)">姻緣方位</span>`;
+  if(yf.goodDir)dr+=`<span class="dir-chip good">📍 ${yf.goodDir}</span>`;
+  if(yf.badDir)dr+=`<span class="dir-chip bad">🚫 避開 ${yf.badDir}</span>`;
+  document.getElementById('dirRow').innerHTML=dr;
+  document.getElementById('summaryText').textContent=d.summary||'';
+  document.getElementById('footerNote').textContent=`${td.y}年${td.m}月${td.d}日・${td.dgz}日・三盤推算・僅供參考`;
+}
+
+let apiKey=localStorage.getItem('gjk_key')||'';
+function openSettings(){document.getElementById('apiKeyInput').value=apiKey;document.getElementById('settingsModal').classList.remove('hidden')}
+function closeSettings(){document.getElementById('settingsModal').classList.add('hidden')}
+function saveKey(){const v=document.getElementById('apiKeyInput').value.trim();if(!v){alert('請輸入 API Key');return;}apiKey=v;localStorage.setItem('gjk_key',v);closeSettings();loadFortune(true)}
+document.getElementById('settingsModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});
+function cacheKey(td){return`fortune3_${td.y}_${td.m}_${td.d}`}
+
+async function loadFortune(force){
+  if(!apiKey){openSettings();return;}
+  const td=initDate();const ck=cacheKey(td);
+  if(!force){try{const c=localStorage.getItem(ck);if(c){render(JSON.parse(c),td);document.getElementById('loadingState').classList.add('hidden');document.getElementById('content').classList.remove('hidden');document.getElementById('cacheNotice').textContent='顯示今日已儲存的運勢・點下方按鈕可重新推算';return}}catch(e){}}
+  document.getElementById('loadingState').classList.remove('hidden');
+  document.getElementById('content').classList.add('hidden');
+  document.getElementById('errorState').classList.add('hidden');
+  try{
+    const data=await callGemini(buildPrompt(td));
+    localStorage.setItem(ck,JSON.stringify(data));
+    Object.keys(localStorage).filter(k=>k.startsWith('fortune3_')&&k!==ck).forEach(k=>localStorage.removeItem(k));
+    render(data,td);
+    document.getElementById('loadingState').classList.add('hidden');
+    document.getElementById('content').classList.remove('hidden');
+    document.getElementById('cacheNotice').textContent='已推算完成・明日開啟自動更新';
+  }catch(e){
+    document.getElementById('loadingState').classList.add('hidden');
+    document.getElementById('errorMsg').textContent=e.message;
+    document.getElementById('errorState').classList.remove('hidden');
+    if(/401|403|key|API/i.test(e.message))setTimeout(openSettings,800);
+  }
+}
+initDate();loadFortune(false);
+</script>
+</body>
+</html>
