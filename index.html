@@ -340,34 +340,27 @@ function buildPrompt(td){
 
 規則：誠實評分1-10，全部用白話文，不用命理術語，結論+原因，姻緣分析要具體有場景感。
 
-嚴格以下列JSON格式回覆，不加任何文字或markdown：
-{"totalScore":整數,"overallLabel":"狀態一詞","lunarDate":"農曆幾月幾日","yi":["宜1","宜2","宜3","宜4"],"ji":["忌1","忌2","忌3","忌4"],"luckyColor":"幸運色","luckyNumber":"幸運數","peakTime":"旺時","luckyItem":"開運物","tips":["建議1","建議2","建議3"],"scores":{"love":{"score":整數,"stars":"★★★★☆","desc":"一句話"},"career":{"score":整數,"stars":"★★★☆☆","desc":"一句話"},"wealth":{"score":整數,"stars":"★★★☆☆","desc":"一句話"},"health":{"score":整數,"stars":"★★★☆☆","desc":"一句話"}},"bazi":{"stars":"★★★★☆","text":"約100字白話"},"ziwei":{"stars":"★★★★★","subLabel":"今日活躍宮位","text":"約120字多段分析"},"zodiac":{"stars":"★★★★☆","text":"約80字多段"},"yuanfen":{"stars":"★★★★★","summary":"約60字","guiren":"今日貴人說明，星座名用**加粗**","matches":[{"badge":"命盤首選・今日最強","name":"星座名","desc":"約50字"},{"badge":"今日加分","name":"星座名","desc":"約50字"},{"badge":"命盤次選","name":"星座名","desc":"約50字"},{"badge":"命盤次選","name":"星座名","desc":"約50字"}],"goodDir":"吉方","badDir":"凶方"},"summary":"約80字總結"}`;
+只回傳JSON，不加任何說明或markdown，格式如下：
+{"totalScore":8,"overallLabel":"順暢有利","lunarDate":"四月初二","yi":["宜1","宜2","宜3","宜4"],"ji":["忌1","忌2","忌3"],"luckyColor":"珊瑚橘","luckyNumber":"2・7","peakTime":"11-13時","luckyItem":"橘色飾品","tips":["建議1","建議2","建議3"],"scores":{"love":{"score":8,"stars":"★★★★☆","desc":"說明"},"career":{"score":7,"stars":"★★★★☆","desc":"說明"},"wealth":{"score":6,"stars":"★★★☆☆","desc":"說明"},"health":{"score":7,"stars":"★★★★☆","desc":"說明"}},"bazi":{"stars":"★★★★☆","text":"八字分析100字"},"ziwei":{"stars":"★★★★★","subLabel":"夫妻宮最活躍","text":"紫微分析120字"},"zodiac":{"stars":"★★★★☆","text":"星座分析80字"},"yuanfen":{"stars":"★★★★★","summary":"姻緣總結60字","guiren":"貴人說明，用**星座名**加粗","matches":[{"badge":"命盤首選","name":"獅子座","desc":"說明50字"},{"badge":"今日加分","name":"天秤座","desc":"說明50字"},{"badge":"命盤次選","name":"牡羊座","desc":"說明50字"},{"badge":"命盤次選","name":"射手座","desc":"說明50字"}],"goodDir":"東南・正南","badDir":"正北"},"summary":"總結80字"}`;
 }
 
 async function callGemini(prompt){
   const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
   const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
     contents:[{parts:[{text:prompt}]}],
-    generationConfig:{temperature:0.72,maxOutputTokens:4000,thinkingConfig:{thinkingBudget:0}}
+    generationConfig:{temperature:0.7,maxOutputTokens:8192,thinkingConfig:{thinkingBudget:0}}
   })});
   if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||`HTTP ${res.status}`);}
   const data=await res.json();
-  // 思考型模型會有多個 parts，把所有 text 合併後再找 JSON
+  // 合併所有 parts（思考型模型有多個 parts）
   const allParts=data.candidates?.[0]?.content?.parts||[];
   const raw=allParts.map(p=>p.text||'').join('');
-  // 找最後一個完整 JSON 物件（思考型模型的 JSON 在最後）
-  const matches=[...raw.matchAll(/\{[\s\S]*?\}/g)];
-  let parsed=null;
-  for(let i=matches.length-1;i>=0;i--){
-    try{parsed=JSON.parse(matches[i][0]);if(parsed.totalScore)break;}catch(e){}
-  }
-  // 若上面失敗，用貪婪匹配抓最大 JSON
-  if(!parsed){
-    const m=raw.match(/\{[\s\S]*\}/);
-    if(!m)throw new Error('回應格式異常，請重試');
-    try{parsed=JSON.parse(m[0]);}catch(e){throw new Error('JSON解析失敗，請重試');}
-  }
-  return parsed;
+  // 找第一個 { 到最後一個 } 之間的內容
+  const start=raw.indexOf('{');
+  const end=raw.lastIndexOf('}');
+  if(start===-1||end===-1)throw new Error('回應格式異常，請重試');
+  const jsonStr=raw.slice(start,end+1);
+  try{return JSON.parse(jsonStr);}catch(e){throw new Error('JSON解析失敗：'+e.message);}
 }
 
 function splitPara(txt){return(txt||'').split(/(?<=[。！？])\s*/).filter(p=>p.trim().length>4).map(p=>`<p>${p.trim()}</p>`).join('')}
