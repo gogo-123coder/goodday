@@ -537,7 +537,7 @@ async function callGemini(prompt){
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       contents:[{parts:[{text:prompt}]}],
-      generationConfig:{temperature:0.72,maxOutputTokens:8192,thinkingConfig:{thinkingBudget:0}}
+      generationConfig:{temperature:0.5,maxOutputTokens:8192,thinkingConfig:{thinkingBudget:0}}
     })
   });
   if(!res.ok){const e=await res.json().catch(()=>({}));throw new Error(e.error?.message||`HTTP ${res.status}`);}
