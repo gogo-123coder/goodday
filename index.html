@@ -19,15 +19,13 @@ body {
 }
 .page {
   max-width: 430px; margin: 0 auto;
-  padding: 56px 12px 28px;
+  padding: 12px 12px 24px;
   display: flex; flex-direction: column; gap: 8px;
 }
-
-/* ── HEADER ── */
 .hdr {
   background: #fff; border-radius: 16px; padding: 14px 16px;
-  display: flex; justify-content: space-between; align-items: flex-start;
-  box-shadow: 0 1px 6px rgba(0,0,0,.06); position: relative;
+  display: flex; justify-content: space-between; align-items: center;
+  box-shadow: 0 1px 6px rgba(0,0,0,.06);
 }
 .hdr-name { font-size: 22px; font-weight: 700; color: #1c1814; letter-spacing: 1px; }
 .hdr-name span { color: #b06848; }
@@ -49,8 +47,6 @@ body {
   display: flex; align-items: center; justify-content: center;
   color: #a09890;
 }
-
-/* ── OVERALL ── */
 .overall {
   background: #fff; border-radius: 12px; padding: 12px 16px;
   display: flex; align-items: center; gap: 10px;
@@ -61,8 +57,6 @@ body {
 .ov-dot { height: 6px; flex: 1; border-radius: 3px; background: #e8e2da; }
 .ov-dot.on { background: #b06848; }
 .ov-score { font-size: 14px; font-weight: 600; color: #b06848; white-space: nowrap; }
-
-/* ── CARD ── */
 .card {
   background: #fff; border-radius: 16px; overflow: hidden;
   box-shadow: 0 1px 6px rgba(0,0,0,.06);
@@ -76,39 +70,33 @@ body {
   display: flex; align-items: center; justify-content: center;
   font-size: 17px; flex-shrink: 0;
 }
-.ic-gold { background: #fdf4e4; }
-.ic-red  { background: #fdf0ea; }
-.ic-blue { background: #eaf0fb; }
-.ic-pink { background: #faeef4; }
-.ic-green{ background: #eaf5ee; }
-.ic-sun  { background: #fff8e6; }
+.ic-gold   { background: #fdf4e4; }
+.ic-red    { background: #fdf0ea; }
+.ic-blue   { background: #eaf0fb; }
+.ic-pink   { background: #faeef4; }
+.ic-green  { background: #eaf5ee; }
+.ic-purple { background: #f0eafb; }
 .card-ttl { font-size: 16px; font-weight: 700; flex: 1; }
 .card-sub { font-size: 11px; color: #a09890; margin-top: 1px; }
 .card-stars { font-size: 13px; color: #b06848; white-space: nowrap; }
 .card-body { padding: 12px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
-
-/* ── YI JI ── */
-.yiji-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
-.yj { background: #f9f6f1; border-radius: 10px; padding: 10px 10px; }
-.yj.yi { box-shadow: inset 3px 0 0 #4e8468; }
-.yj.ji { box-shadow: inset 3px 0 0 #c07070; }
+.yiji-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.yj { background: #f9f6f1; border-radius: 10px; padding: 10px 12px; }
+.yj.yi { border-left: 3px solid #4e8468; }
+.yj.ji { border-left: 3px solid #c07070; }
 .yj-title { font-size: 11px; font-weight: 600; margin-bottom: 6px; letter-spacing: 1px; }
 .yj.yi .yj-title { color: #4e8468; }
 .yj.ji .yj-title { color: #c07070; }
 .yj-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-.yj-list li { font-size: 13px; color: #3a3330; display: flex; align-items: baseline; gap: 4px; }
+.yj-list li { font-size: 13.5px; color: #3a3330; display: flex; align-items: baseline; gap: 5px; }
 .yj-list li::before { content: '·'; font-size: 16px; flex-shrink: 0; }
 .yj.yi .yj-list li::before { color: #4e8468; }
 .yj.ji .yj-list li::before { color: #c07070; }
-
-/* ── CHIPS ── */
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
   padding: 6px 12px; border-radius: 20px; font-size: 13px;
   border: 1px solid #e2dcd4; color: #3a3330; background: #f9f6f1;
 }
-
-/* ── TIPS (開運建議) ── */
 .con-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .con-list li {
   display: flex; align-items: flex-start; gap: 10px;
@@ -116,8 +104,6 @@ body {
   font-size: 14.5px; line-height: 1.75; color: #2c1f08;
 }
 .con-list li .ci { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
-
-/* ── SCORE DOTS ── */
 .score-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
 .score-item { background: #f9f6f1; border-radius: 9px; padding: 8px 4px; text-align: center; }
 .sc-label { font-size: 10px; color: #a09890; margin-bottom: 4px; }
@@ -125,25 +111,54 @@ body {
 .sc-dot { width: 6px; height: 6px; border-radius: 50%; background: #e8e2da; }
 .sc-dot.on { background: #b06848; }
 
-/* ── PARTNER CARDS ── */
-.partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.partner-card {
-  border-radius: 12px; padding: 12px;
-  display: flex; flex-direction: column; gap: 5px;
+/* ── 本週運勢 ── */
+.week-range { font-size: 11px; color: #a09890; letter-spacing: .5px; }
+.week-summary {
+  background: #f0eafb; border-radius: 12px; padding: 11px 14px;
+  border-left: 3px solid #9b72cb;
+  font-size: 13.5px; color: #2d1f4a; line-height: 1.7;
 }
+.week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.week-day {
+  background: #f9f6f1; border-radius: 8px; padding: 7px 4px;
+  text-align: center; display: flex; flex-direction: column; gap: 3px;
+}
+.week-day.today { background: #f0eafb; border: 1.5px solid #9b72cb; }
+.week-day.best  { background: #faeef4; border: 1.5px solid rgba(190,80,130,.3); }
+.week-day.done  { opacity: .45; }
+.wd-name  { font-size: 10px; color: #a09890; }
+.wd-date  { font-size: 11px; font-weight: 700; color: #1c1814; }
+.wd-bar   { height: 28px; border-radius: 4px; background: #e8e2da; margin: 2px auto; width: 10px; position: relative; overflow: hidden; }
+.wd-fill  { position: absolute; bottom: 0; left: 0; right: 0; border-radius: 4px; background: #b06848; }
+.week-day.today .wd-fill { background: #9b72cb; }
+.week-day.best  .wd-fill { background: #be5082; }
+.wd-score { font-size: 9px; color: #a09890; }
+.week-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.week-cat { background: #f9f6f1; border-radius: 10px; padding: 10px 12px; }
+.wc-label { font-size: 11px; font-weight: 600; color: #7a6858; letter-spacing: 1px; margin-bottom: 5px; }
+.wc-best  { font-size: 13px; color: #b06848; font-weight: 600; margin-bottom: 3px; }
+.wc-desc  { font-size: 12px; color: #5a4a3a; line-height: 1.55; }
+.week-tip {
+  background: #f0eafb; border-radius: 10px; padding: 10px 13px;
+  font-size: 13px; color: #4a2878; line-height: 1.65;
+  border-left: 3px solid #9b72cb;
+}
+.week-loading {
+  background: #f0eafb; border-radius: 10px; padding: 14px;
+  font-size: 13px; color: #9b72cb; text-align: center; letter-spacing: 1px;
+}
+
+/* ── PARTNER ── */
+.partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.partner-card { border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 5px; }
 .partner-card.first  { background: #faeef4; border: 1px solid rgba(190,80,130,.18); }
 .partner-card.second { background: #f9f6f1; border: 1px solid rgba(201,168,76,.2); }
 .pc-sign { font-size: 24px; }
 .pc-name { font-size: 15px; font-weight: 700; color: #1c1814; }
-.pc-tag {
-  font-size: 10px; font-weight: 600; width: fit-content;
-  border-radius: 6px; padding: 2px 7px;
-}
+.pc-tag { font-size: 10px; font-weight: 600; width: fit-content; border-radius: 6px; padding: 2px 7px; }
 .partner-card.first  .pc-tag { background: rgba(168,72,104,.12); color: #a84868; }
 .partner-card.second .pc-tag { background: rgba(180,150,60,.14); color: #886828; }
 .pc-reason { font-size: 12.5px; line-height: 1.6; color: #4a3828; }
-
-/* ── NOBLE ── */
 .noble {
   background: #eaf5ee; border-radius: 12px; padding: 11px 14px;
   display: flex; align-items: flex-start; gap: 10px;
@@ -152,8 +167,6 @@ body {
 .noble-icon { font-size: 20px; flex-shrink: 0; }
 .noble-label { font-size: 11px; font-weight: 600; color: #4e8468; letter-spacing: 1px; margin-bottom: 3px; }
 .noble-text { font-size: 14px; color: #2c3a30; line-height: 1.65; }
-
-/* ── DIRECTION ── */
 .dir-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 .dir-block { border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; gap: 9px; }
 .dir-block.good { background: #eaf5ee; }
@@ -163,18 +176,11 @@ body {
 .dir-block.good .dir-label { color: #4e8468; }
 .dir-block.bad  .dir-label { color: #c07070; }
 .dir-val { font-size: 15px; font-weight: 700; color: #1c1814; }
-
-/* ── HONEST NOTE ── */
 .honest-note {
   background: #f5f5f5; border-radius: 10px; padding: 9px 13px;
-  font-size: 13.5px; color: #5c5450; line-height: 1.7; border-left: 3px solid #ddd;
+  font-size: 12px; color: #888; line-height: 1.6; border-left: 3px solid #ddd;
 }
-
-/* ── FOOTER ── */
-.footer {
-  text-align: center; font-size: 11px;
-  color: #a09890; letter-spacing: .5px; padding: 2px 0 4px;
-}
+.footer { text-align: center; font-size: 11px; color: #a09890; letter-spacing: .5px; padding: 2px 0 4px; }
 .cache-notice { text-align: center; font-size: 11px; color: #c0b8b0; padding: 2px 0; }
 .refresh-btn {
   background: #fff; border: 1px solid #e2dcd4; border-radius: 12px;
@@ -182,8 +188,6 @@ body {
   width: 100%; font-family: inherit; letter-spacing: 1px;
   box-shadow: 0 1px 4px rgba(0,0,0,.05);
 }
-
-/* ── LOADING ── */
 .loading {
   min-height: 80dvh; display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 16px;
@@ -203,16 +207,12 @@ body {
 @keyframes spin { to { transform: rotate(360deg); } }
 .loading-text { font-size: 14px; color: #a09890; letter-spacing: 2px; }
 .loading-sub { font-size: 12px; color: #c0b8b0; }
-
-/* ── ERROR ── */
 .error-wrap { padding: 12px; }
 .error-box {
   background: #fff5f5; border: 1px solid #f0c8c8; border-radius: 12px;
   padding: 14px 16px; color: #c04040; font-size: 14px; line-height: 1.6;
 }
 .error-box strong { display: block; margin-bottom: 6px; font-size: 15px; }
-
-/* ── MODAL ── */
 .modal-backdrop {
   position: fixed; inset: 0; background: rgba(0,0,0,.5);
   z-index: 200; display: flex; align-items: flex-end;
@@ -254,7 +254,7 @@ body {
   <div class="hdr">
     <div>
       <div class="hdr-name">千金的<span>今日運勢</span></div>
-      <div class="hdr-sub" id="hdrSub">雙子座 ♊ · 上升牡羊 · 甲子日主</div>
+      <div class="hdr-sub" id="hdrSub">雙子座 ♊ · 上升牡羊 · 癸水日主</div>
       <div class="hdr-badge">☯ 八字・紫微斗數・星座 三盤推算</div>
     </div>
     <div class="hdr-right">
@@ -268,6 +268,20 @@ body {
     <div class="ov-label">今日整體</div>
     <div class="ov-dots" id="ovDots"></div>
     <div class="ov-score" id="ovScore">—</div>
+  </div>
+
+  <!-- 本週運勢總覽（固定，換週才更新） -->
+  <div class="card">
+    <div class="card-head">
+      <div class="card-icon ic-purple">🗓</div>
+      <div style="flex:1">
+        <div class="card-ttl">本週運勢總覽</div>
+        <div class="card-sub" id="weekCardSub">載入中…</div>
+      </div>
+    </div>
+    <div class="card-body" id="weekCardBody">
+      <div class="week-loading">推算本週運勢中…</div>
+    </div>
   </div>
 
   <!-- LOADING -->
@@ -291,10 +305,10 @@ body {
   <!-- CONTENT -->
   <div id="content" class="hidden" style="display:flex;flex-direction:column;gap:8px">
 
-    <!-- ① 宜忌與開運 -->
+    <!-- 宜忌與開運 -->
     <div class="card">
       <div class="card-head">
-        <div class="card-icon ic-sun">☀️</div>
+        <div class="card-icon ic-green">☀️</div>
         <div style="flex:1">
           <div class="card-ttl">今日宜忌與開運</div>
           <div class="card-sub" id="cardSub1">—</div>
@@ -315,7 +329,7 @@ body {
       </div>
     </div>
 
-    <!-- ② 八字 -->
+    <!-- 八字 -->
     <div class="card">
       <div class="card-head">
         <div class="card-icon ic-gold">𝌞</div>
@@ -331,13 +345,13 @@ body {
       </div>
     </div>
 
-    <!-- ③ 紫微 -->
+    <!-- 紫微 -->
     <div class="card">
       <div class="card-head">
         <div class="card-icon ic-red">✦</div>
         <div style="flex:1">
           <div class="card-ttl">紫微斗數今日</div>
-          <div class="card-sub" id="ziweiSub">廉貞坐命</div>
+          <div class="card-sub" id="ziweiSub">天梁在巳</div>
         </div>
         <div class="card-stars" id="ziweiStars"></div>
       </div>
@@ -347,7 +361,7 @@ body {
       </div>
     </div>
 
-    <!-- ④ 星座 -->
+    <!-- 星座 -->
     <div class="card">
       <div class="card-head">
         <div class="card-icon ic-blue">♊</div>
@@ -363,7 +377,7 @@ body {
       </div>
     </div>
 
-    <!-- ⑤ 姻緣 & 貴人 -->
+    <!-- 姻緣 & 貴人 -->
     <div class="card">
       <div class="card-head">
         <div class="card-icon ic-pink">💕</div>
@@ -392,9 +406,9 @@ body {
     <button class="refresh-btn" onclick="loadFortune(true)">↻ 重新推算今日運勢</button>
     <div class="footer" id="footerNote"></div>
 
-  </div><!-- /content -->
+  </div>
 
-</div><!-- /page -->
+</div>
 
 <!-- SETTINGS MODAL -->
 <div id="settingsModal" class="modal-backdrop hidden">
@@ -412,24 +426,21 @@ body {
 </div>
 
 <script>
-/* ── CONSTANTS ── */
 const STEMS=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 const BRANCHES=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
 const WEEKDAY=['日','一','二','三','四','五','六'];
 const BIRTH={
   year:1987,month:6,day:13,lunarMonth:5,lunarDay:18,hourBranch:'丑',
-  bazi:'丁卯年 丙午月 癸巳日 癸丑時',riZhu:'甲子日主',
-  mingGong:'未宮（土五局）',mainStars:'天機星入命，輔以太陰',
+  bazi:'丁卯年 丙午月 癸巳日 癸丑時',riZhu:'癸水日主',
+  mingGong:'天梁在巳',
   shangSheng:'上升牡羊',zodiac:'雙子座',chineseZodiac:'兔',
-  status:'目前單身，期望遇到適合的姻緣伴侶'
+  status:'目前單身，正在積極尋找姻緣伴侶'
 };
 
-/* ── GAN ZHI ── */
 function yearGZ(y){const i=((y-4)%60+60)%60;return STEMS[i%10]+BRANCHES[i%12]}
 function monthGZ(y,m){const si=((y-4)%10+10)%10;const bi=m===12?0:m;return STEMS[((si%5)*2+bi)%10]+BRANCHES[bi]}
 function dayGZ(y,m,d){const diff=Math.round((new Date(y,m-1,d)-new Date(1900,0,1))/86400000);const i=((10+diff)%60+60)%60;return STEMS[i%10]+BRANCHES[i%12]}
 
-/* ── SCORE DOTS HTML ── */
 function scoreDots(n){
   return Array.from({length:5},(_,i)=>`<div class="sc-dot${i<n?' on':''}"></div>`).join('');
 }
@@ -437,34 +448,169 @@ function makeDotRow(items){
   return items.map(({l,n})=>`<div class="score-item"><div class="sc-label">${l}</div><div class="sc-dots">${scoreDots(n)}</div></div>`).join('');
 }
 
-/* ── SPLIT TEXT INTO CON-LIST ── */
 const PARA_ICOS=['✨','🤝','💰','🌸','😊','💼','💬','🌿','📱','⭐','🔆','💫'];
-function textToConList(txt,icos){
-  const icoSet=icos||PARA_ICOS;
-  const parts=(txt||'').split(/(?<=[。！？])\s*/).filter(p=>p.trim().length>6);
-  return '<ul class="con-list">'+parts.map((p,i)=>`<li><span class="ci">${icoSet[i%icoSet.length]}</span><div>${p.trim()}</div></li>`).join('')+'</ul>';
+
+/* ── WEEK HELPERS ── */
+function getWeekMonday(date){
+  const d=new Date(date);d.setHours(0,0,0,0);
+  const day=d.getDay();
+  const diff=day===0?-6:1-day;
+  d.setDate(d.getDate()+diff);
+  return d;
+}
+function getWeekDates(monday){
+  return Array.from({length:7},(_,i)=>{
+    const d=new Date(monday);d.setDate(monday.getDate()+i);return d;
+  });
+}
+function weekCacheKey(monday){
+  return`wk_${monday.getFullYear()}_${monday.getMonth()+1}_${monday.getDate()}`;
+}
+function fmtMD(d){return`${d.getMonth()+1}/${d.getDate()}`}
+function isSameDay(a,b){return a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate()}
+
+/* ── RENDER WEEK CARD ── */
+function renderWeekCard(w, today){
+  const monday=getWeekMonday(today);
+  const days=getWeekDates(monday);
+  const sunday=days[6];
+  const scores=w.dayScores||[5,5,5,5,5,5,5];
+  const bestScore=Math.max(...scores);
+  const mgz=monthGZ(today.getFullYear(),today.getMonth()+1);
+
+  document.getElementById('weekCardSub').textContent=
+    `${fmtMD(monday)}（一）－ ${fmtMD(sunday)}（日）`;
+
+  let html='';
+  html+=`<div class="week-range">📅 ${today.getFullYear()} / ${fmtMD(monday)}（一）－ ${fmtMD(sunday)}（日）· ${mgz}月</div>`;
+
+  if(w.weekSummary){
+    html+=`<div class="week-summary">${w.weekSummary}</div>`;
+  }
+
+  html+='<div class="week-grid">';
+  days.forEach((day,i)=>{
+    const isToday=isSameDay(day,today);
+    const isPast=day<today&&!isToday;
+    const isBest=scores[i]===bestScore&&scores[i]>=7&&!isToday;
+    let cls='week-day';
+    if(isToday) cls+=' today';
+    else if(isBest) cls+=' best';
+    if(isPast) cls+=' done';
+    const pct=Math.round((scores[i]/10)*100);
+    const starCount=Math.round(scores[i]/2);
+    const stars='★'.repeat(starCount)+'☆'.repeat(5-starCount);
+    html+=`<div class="${cls}">
+      <div class="wd-name">${['一','二','三','四','五','六','日'][i]}</div>
+      <div class="wd-date">${fmtMD(day)}</div>
+      <div class="wd-bar"><div class="wd-fill" style="height:${pct}%"></div></div>
+      <div class="wd-score">${stars.slice(0,4)}</div>
+    </div>`;
+  });
+  html+='</div>';
+
+  const cats=w.cats||[];
+  if(cats.length){
+    html+='<div class="week-cats">'+cats.map(c=>`
+      <div class="week-cat">
+        <div class="wc-label">${c.icon} ${c.label}</div>
+        <div class="wc-best">高峰：${c.best}</div>
+        <div class="wc-desc">${c.desc}</div>
+      </div>`).join('')+'</div>';
+  }
+
+  if(w.weekTip){
+    html+=`<div class="week-tip">💡 ${w.weekTip}</div>`;
+  }
+
+  document.getElementById('weekCardBody').innerHTML=html;
 }
 
-/* ── INIT DATE ── */
-function initDate(){
-  const now=new Date();
-  const y=now.getFullYear(),m=now.getMonth()+1,d=now.getDate();
-  const dgz=dayGZ(y,m,d);
-  const ygz=yearGZ(y),mgz=monthGZ(y,m);
-  document.getElementById('hdrDate').textContent=`${y}/${m}/${d} 週${WEEKDAY[now.getDay()]}`;
-  document.getElementById('cardSub1').textContent=`${dgz}日 · 週${WEEKDAY[now.getDay()]}`;
-  document.getElementById('baziSub').textContent=`${dgz}日`;
-  return{y,m,d,ygz,mgz,dgz};
+/* ── BUILD WEEK PROMPT ── */
+function buildWeekPrompt(monday,days){
+  const mgz=monthGZ(monday.getFullYear(),monday.getMonth()+1);
+  const datesStr=days.map((d,i)=>{
+    const gz=dayGZ(d.getFullYear(),d.getMonth()+1,d.getDate());
+    return `週${'一二三四五六日'[i]} ${fmtMD(d)}（${gz}日）`;
+  }).join('、');
+  return `你是一位嚴謹的命理分析師，根據命主命盤與本週每日干支，給出本週運勢總覽。
+
+【命主命盤】
+- 出生：${BIRTH.year}年${BIRTH.month}月${BIRTH.day}日，農曆${BIRTH.lunarMonth}月${BIRTH.lunarDay}日，${BIRTH.hourBranch}時
+- 八字四柱：${BIRTH.bazi}，日主天干：${BIRTH.riZhu}
+- 紫微命宮：${BIRTH.mingGong}
+- 西洋星座：${BIRTH.zodiac}，上升星座：${BIRTH.shangSheng}，生肖：${BIRTH.chineseZodiac}
+- 感情現況：${BIRTH.status}
+
+【本週資訊】
+- 本週月柱：${mgz}月
+- 本週七日：${datesStr}
+
+【分析原則】
+1. 每日評分根據當日干支對命主五行的實際影響（1-10整數），誠實評分不可全部高分
+2. 所有輸出文字必須是完全白話文，絕對禁止任何命理術語
+3. 感情類分析要著重在遇見新對象的機會（千金單身找姻緣）
+4. 本週摘要要點出本週感情最好的日子
+
+只回傳 JSON，不加任何說明或 markdown 符號：
+
+{
+  "weekSummary": "本週整體節奏的白話總結，點出感情與運勢高峰日（60字）",
+  "dayScores": [週一1到10, 週二, 週三, 週四, 週五, 週六, 週日],
+  "cats": [
+    {"icon":"💰","label":"財運","best":"高峰日，如週三","desc":"本週財運白話一句話（25字）"},
+    {"icon":"💼","label":"事業","best":"高峰日","desc":"本週事業白話一句話（25字）"},
+    {"icon":"💕","label":"感情","best":"高峰日","desc":"本週感情姻緣白話一句話（25字）"},
+    {"icon":"🌿","label":"健康","best":"狀態描述詞","desc":"本週健康白話一句話（25字）"}
+  ],
+  "weekTip": "本週最重要的一個行動建議，白話，針對單身找姻緣的千金（40字）"
+}`;
 }
 
-/* ── BUILD PROMPT ── */
+/* ── LOAD WEEK ── */
+async function loadWeekFortune(today){
+  const monday=getWeekMonday(today);
+  const days=getWeekDates(monday);
+  const ck=weekCacheKey(monday);
+
+  try{
+    const cached=localStorage.getItem(ck);
+    if(cached){ renderWeekCard(JSON.parse(cached),today); return; }
+  }catch(e){}
+
+  if(!apiKey){
+    renderWeekCard({
+      dayScores:[5,5,5,5,5,5,5],
+      weekSummary:'設定 API Key 後將自動推算本週運勢',
+      cats:[
+        {icon:'💰',label:'財運',best:'—',desc:'設定後自動更新'},
+        {icon:'💼',label:'事業',best:'—',desc:'設定後自動更新'},
+        {icon:'💕',label:'感情',best:'—',desc:'設定後自動更新'},
+        {icon:'🌿',label:'健康',best:'—',desc:'設定後自動更新'}
+      ]
+    },today);
+    return;
+  }
+
+  try{
+    const data=await callGemini(buildWeekPrompt(monday,days));
+    localStorage.setItem(ck,JSON.stringify(data));
+    // 清除舊週快取
+    Object.keys(localStorage).filter(k=>k.startsWith('wk_')&&k!==ck).forEach(k=>localStorage.removeItem(k));
+    renderWeekCard(data,today);
+  }catch(e){
+    renderWeekCard({dayScores:[5,5,5,5,5,5,5],weekSummary:'本週運勢暫時無法推算',cats:[]},today);
+  }
+}
+
+/* ── BUILD DAILY PROMPT ── */
 function buildPrompt(td){
   return `你是一位嚴謹的命理分析師，請根據命主的真實命盤與今日干支，給出今日運勢分析。
 
 【命主命盤】
 - 出生：${BIRTH.year}年${BIRTH.month}月${BIRTH.day}日，農曆${BIRTH.lunarMonth}月${BIRTH.lunarDay}日，${BIRTH.hourBranch}時
 - 八字四柱：${BIRTH.bazi}，日主天干：${BIRTH.riZhu}
-- 紫微命宮：${BIRTH.mingGong}，命宮主星：${BIRTH.mainStars}
+- 紫微命宮：${BIRTH.mingGong}
 - 西洋星座：${BIRTH.zodiac}，上升星座：${BIRTH.shangSheng}，生肖：${BIRTH.chineseZodiac}
 - 感情現況：${BIRTH.status}
 
@@ -478,61 +624,59 @@ function buildPrompt(td){
 3. 整體評分若低於6分，overallLabel 要如實反映（如「平穩」「宜靜」「謹慎」）
 4. 姻緣貴人星座每天必須根據今日日柱五行重新推算，不可固定給同樣的星座
 5. 宜忌要具體可執行，不要說空話
-6. 【最重要】輸出的所有文字必須是完全的白話文，像在跟朋友聊天。命理術語只能用在你的內部推算過程，絕對不可以出現在輸出文字裡
-7. 以下這些詞彙和句型絕對禁止出現在輸出文字中：天干、地支、干支、五行、日主、日柱、流日、流年、食神、印星、官星、財星、殺星、合化、沖剋、宮位名稱（如夫妻宮、官祿宮、福德宮、財帛宮）、對位、入宮、得令、失令、旺衰、三合、六合、刑沖、桃花、食神、正官、偏財⋯⋯等任何命理專業名詞
-8. 正確的白話寫法範例：不要說「食神得令讓你人緣旺」，要說「今天你講話特別有魅力，別人很容易被你吸引」；不要說「夫妻宮受流日沖動」，要說「今天感情上容易有波動，和對方相處要多留意語氣」
-9. 每段分析要說「今天的狀況是什麼 + 對千金的具體影響是什麼 + 建議怎麼做」，不要只說抽象結論
+6. 輸出的所有文字必須是完全的白話文，像在跟朋友聊天。命理術語只能用在你的內部推算過程，絕對不可以出現在輸出文字裡
+7. 以下詞彙絕對禁止出現在輸出文字中：天干、地支、干支、五行、日主、日柱、流日、流年、食神、印星、官星、財星、殺星、合化、沖剋、宮位名稱（夫妻宮、官祿宮、福德宮、財帛宮）、入宮、得令、失令、旺衰、三合、六合、刑沖、桃花、正官、偏財等任何命理術語
+8. 正確白話範例：不說「食神得令人緣旺」→ 說「今天你講話特別有魅力」；不說「夫妻宮受沖」→ 說「今天感情容易有小波折」
+9. 每段分析：今天的狀況是什麼 + 對千金的具體影響 + 建議怎麼做
 
-【輸出格式】
-只回傳 JSON，不加任何說明或 markdown 符號。
-欄位說明（只說明結構，內容請自行根據命盤推算，不要照抄）：
+只回傳 JSON，不加任何說明或 markdown 符號：
 
 {
-  "totalScore": 今日整體評分整數1到10,
-  "overallLabel": "今日整體狀態描述詞，如旺盛/平穩/宜靜/謹慎/低調",
+  "totalScore": 整數1到10,
+  "overallLabel": "今日狀態一詞如旺盛/平穩/宜靜/謹慎",
   "lunarDate": "農曆日期",
-  "yi": ["今日宜做的事1","宜2","宜3","宜4"],
-  "ji": ["今日忌做的事1","忌2","忌3","忌4"],
-  "luckyColor": "今日幸運色（根據今日五行推算）",
-  "luckyNumber": "今日幸運數字",
-  "peakTime": "今日最旺時段",
-  "luckyItem": "今日開運物（根據今日五行）",
+  "yi": ["宜1","宜2","宜3","宜4"],
+  "ji": ["忌1","忌2","忌3","忌4"],
+  "luckyColor": "幸運色",
+  "luckyNumber": "幸運數字",
+  "peakTime": "最旺時段",
+  "luckyItem": "開運物",
   "bazi": {
-    "stars": "今日八字評分★數",
-    "paras": ["第一段：今日日柱對千金整體的影響（50字）","第二段：今日感情或人際面向（50字）","第三段：今日財運或事業面向（40字）"],
-    "scores": [{"l":"事業","n":今日事業點數1到5},{"l":"財運","n":今日財運點數},{"l":"感情","n":今日感情點數},{"l":"健康","n":今日健康點數}]
+    "stars": "★評分",
+    "paras": ["整體影響50字","感情人際50字","財運事業40字"],
+    "scores": [{"l":"事業","n":1到5},{"l":"財運","n":點數},{"l":"感情","n":點數},{"l":"健康","n":點數}]
   },
   "ziwei": {
-    "stars": "今日紫微評分★數",
-    "subLabel": "今日最活躍的宮位名稱",
-    "paras": ["第一段：今日最活躍宮位的影響（50字）","第二段：感情相關宮位分析（50字）","第三段：事業或財帛宮分析（40字）"],
-    "scores": [{"l":"官祿","n":點數1到5},{"l":"財帛","n":點數},{"l":"夫妻","n":點數},{"l":"福德","n":點數}]
+    "stars": "★評分",
+    "subLabel": "今日最活躍宮位",
+    "paras": ["宮位影響50字","感情宮分析50字","事業財帛40字"],
+    "scores": [{"l":"官祿","n":點數},{"l":"財帛","n":點數},{"l":"夫妻","n":點數},{"l":"福德","n":點數}]
   },
   "zodiac": {
-    "stars": "今日星座評分★數",
-    "subLabel": "雙子座・當前星座季節",
-    "paras": ["第一段：今日星座整體能量對千金的影響（50字）","第二段：感情或社交面向（50字）","第三段：工作或財運面向（40字）"],
+    "stars": "★評分",
+    "subLabel": "雙子座・當前季節",
+    "paras": ["整體能量50字","感情社交50字","工作財運40字"],
     "scores": [{"l":"事業","n":點數},{"l":"愛情","n":點數},{"l":"財運","n":點數},{"l":"社交","n":點數}]
   },
   "yuanfen": {
-    "stars": "今日姻緣評分★數",
-    "summary": "根據今日三盤分析，今天姻緣能量的客觀描述，好就說好、普通就說普通（60字）",
-    "guiren": "根據今日日柱五行推算，今日貴人星座是哪個以及原因（50字，星座名用**加粗**）",
+    "stars": "★評分",
+    "summary": "今天姻緣能量客觀描述60字",
+    "guiren": "今日貴人星座及原因50字，星座名用**加粗**",
     "matches": [
-      {"cls":"first","sign":"星座符號","name":"根據今日五行推算的最合星座","tag":"今日命盤首選","reason":"說明今日為何這個星座與千金最合（60字）"},
-      {"cls":"first","sign":"星座符號","name":"第二合適星座","tag":"今日加分","reason":"說明原因（60字）"},
-      {"cls":"second","sign":"星座符號","name":"第三合適星座","tag":"命盤次選","reason":"說明原因（60字）"},
-      {"cls":"second","sign":"星座符號","name":"第四合適星座","tag":"命盤次選","reason":"說明原因（60字）"}
+      {"cls":"first","sign":"符號","name":"最合星座","tag":"今日命盤首選","reason":"原因60字"},
+      {"cls":"first","sign":"符號","name":"第二合","tag":"今日加分","reason":"原因60字"},
+      {"cls":"second","sign":"符號","name":"第三合","tag":"命盤次選","reason":"原因60字"},
+      {"cls":"second","sign":"符號","name":"第四合","tag":"命盤次選","reason":"原因60字"}
     ],
-    "goodDir": "根據今日五行推算的吉方",
-    "badDir": "根據今日五行推算的凶方"
+    "goodDir": "吉方",
+    "badDir": "凶方"
   }
 }`;
 }
 
 /* ── CALL GEMINI ── */
 async function callGemini(prompt){
-  const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+  const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
   const res=await fetch(url,{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
@@ -550,20 +694,16 @@ async function callGemini(prompt){
   catch(e){throw new Error('JSON解析失敗：'+e.message);}
 }
 
-/* ── RENDER ── */
+/* ── RENDER DAILY ── */
 function render(d,td){
-  // overall
   const n=d.totalScore||5;
   document.getElementById('overallRow').style.display='flex';
   document.getElementById('ovDots').innerHTML=Array.from({length:5},(_,i)=>`<div class="ov-dot${i<Math.round(n/2)?' on':''}"></div>`).join('');
   document.getElementById('ovScore').textContent=d.overallLabel||'—';
   if(d.lunarDate)document.getElementById('hdrLunar').textContent=`農曆 ${d.lunarDate}`;
 
-  // yi ji
   document.getElementById('yiList').innerHTML=(d.yi||[]).map(t=>`<li>${t}</li>`).join('');
   document.getElementById('jiList').innerHTML=(d.ji||[]).map(t=>`<li>${t}</li>`).join('');
-
-  // chips
   document.getElementById('chipList').innerHTML=[
     d.luckyColor?`<span class="chip">🎨 幸運色 ${d.luckyColor}</span>`:'',
     d.luckyNumber?`<span class="chip">🔢 幸運數 ${d.luckyNumber}</span>`:'',
@@ -571,32 +711,27 @@ function render(d,td){
     d.luckyItem?`<span class="chip">💎 開運物 ${d.luckyItem}</span>`:'',
   ].join('');
 
-  // bazi
   const bz=d.bazi||{};
   document.getElementById('baziStars').textContent=bz.stars||'';
   document.getElementById('baziList').innerHTML=(bz.paras||[]).map((p,i)=>`<li><span class="ci">${PARA_ICOS[i]}</span><div>${p}</div></li>`).join('');
   document.getElementById('baziScores').innerHTML=makeDotRow(bz.scores||[]);
 
-  // ziwei
   const zw=d.ziwei||{};
   document.getElementById('ziweiStars').textContent=zw.stars||'';
-  document.getElementById('ziweiSub').textContent=zw.subLabel||'廉貞坐命';
+  document.getElementById('ziweiSub').textContent=zw.subLabel||'天梁在巳';
   document.getElementById('ziweiList').innerHTML=(zw.paras||[]).map((p,i)=>`<li><span class="ci">${['🌸','😊','💼'][i]||PARA_ICOS[i]}</span><div>${p}</div></li>`).join('');
   document.getElementById('ziweiScores').innerHTML=makeDotRow(zw.scores||[]);
 
-  // zodiac
   const zo=d.zodiac||{};
   document.getElementById('zodiacStars').textContent=zo.stars||'';
   document.getElementById('zodiacSub').textContent=zo.subLabel||'雙子座';
   document.getElementById('zodiacList').innerHTML=(zo.paras||[]).map((p,i)=>`<li><span class="ci">${['💬','🌿','📱'][i]||PARA_ICOS[i]}</span><div>${p}</div></li>`).join('');
   document.getElementById('zodiacScores').innerHTML=makeDotRow(zo.scores||[]);
 
-  // yuanfen
   const yf=d.yuanfen||{};
   document.getElementById('yuanfenStars').textContent=yf.stars||'';
   document.getElementById('yuanfenSummary').textContent=yf.summary||'';
   document.getElementById('guirenText').innerHTML=(yf.guiren||'').replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
-
   document.getElementById('matchGrid').innerHTML=(yf.matches||[]).map(m=>`
     <div class="partner-card ${m.cls||'second'}">
       <div class="pc-sign">${m.sign||'★'}</div>
@@ -604,7 +739,6 @@ function render(d,td){
       <div class="pc-tag">${m.tag||''}</div>
       <div class="pc-reason">${m.reason||''}</div>
     </div>`).join('');
-
   document.getElementById('dirRow').innerHTML=`
     <div class="dir-block good">
       <div class="dir-icon">🧭</div>
@@ -614,7 +748,6 @@ function render(d,td){
       <div class="dir-icon">🚫</div>
       <div><div class="dir-label">避開方位</div><div class="dir-val">${yf.badDir||'—'}</div></div>
     </div>`;
-
   document.getElementById('footerNote').textContent=
     `${td.y}年${td.m}月${td.d}日 · ${td.dgz}日 · 農曆${d.lunarDate||'—'} · 三盤推算 · 僅供參考`;
 }
@@ -626,12 +759,25 @@ function closeSettings(){document.getElementById('settingsModal').classList.add(
 function saveKey(){
   const v=document.getElementById('apiKeyInput').value.trim();
   if(!v){alert('請輸入 API Key');return;}
-  apiKey=v;localStorage.setItem('gjk_key',v);closeSettings();loadFortune(true);
+  apiKey=v;localStorage.setItem('gjk_key',v);closeSettings();
+  loadWeekFortune(new Date());
+  loadFortune(true);
 }
 document.getElementById('settingsModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings();});
 
-/* ── CACHE ── */
 function cacheKey(td){return`fortune4_${td.y}_${td.m}_${td.d}`;}
+
+/* ── INIT DATE ── */
+function initDate(){
+  const now=new Date();
+  const y=now.getFullYear(),m=now.getMonth()+1,d=now.getDate();
+  const dgz=dayGZ(y,m,d);
+  const ygz=yearGZ(y),mgz=monthGZ(y,m);
+  document.getElementById('hdrDate').textContent=`${y}/${m}/${d} 週${WEEKDAY[now.getDay()]}`;
+  document.getElementById('cardSub1').textContent=`${dgz}日 · 週${WEEKDAY[now.getDay()]}`;
+  document.getElementById('baziSub').textContent=`${dgz}日`;
+  return{y,m,d,ygz,mgz,dgz};
+}
 
 /* ── MAIN ── */
 async function loadFortune(force){
@@ -669,7 +815,10 @@ async function loadFortune(force){
   }
 }
 
+/* ── BOOT ── */
+const _today=new Date();
 initDate();
+loadWeekFortune(_today);
 loadFortune(false);
 </script>
 </body>
